@@ -1,344 +1,556 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vp1 — Descarga la app</title>
+<title>VP1 — Tu ciudad. Tus negocios. Tus antojos.</title>
+<meta name="description" content="VP1 conecta clientes con negocios locales de Altamira para pedir comida, mandados y más, con seguimiento en tiempo real. Próximamente en Tampico y Ciudad Madero.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg-night:#181310;
-    --bg-night-2:#211a15;
-    --red-salsa:#c8382e;
-    --red-salsa-dark:#8f2620;
-    --yellow-corn:#f2b705;
-    --green-avocado:#5b8c4a;
-    --paper:#f7efe0;
-    --paper-shadow:#e8dcc4;
-    --ink:#2b2420;
-    --ink-soft:#5b5044;
-    --smoke:#b9afa4;
+  :root[data-theme="dark"]{
+    --bg:#0b0d10;
+    --bg-soft:#12151a;
+    --surface:#181b21;
+    --surface-2:#1f232a;
+    --text:#f4f5f6;
+    --text-soft:#9aa3ad;
+    --line:rgba(255,255,255,.09);
+    --yellow:#ffc630;
+    --yellow-ink:#231a00;
+    --green:#3fa66b;
+    --green-soft:rgba(63,166,107,.14);
+    --red:#e5484d;
+    --red-soft:rgba(229,72,77,.14);
+    --shadow:0 30px 70px -30px rgba(0,0,0,.65);
+    --phone-bezel:#050607;
   }
- 
+  :root[data-theme="light"]{
+    --bg:#f7f5f0;
+    --bg-soft:#efece5;
+    --surface:#ffffff;
+    --surface-2:#f2f0ea;
+    --text:#171512;
+    --text-soft:#68635a;
+    --line:rgba(23,21,18,.10);
+    --yellow:#f2ac00;
+    --yellow-ink:#1c1400;
+    --green:#1f8a52;
+    --green-soft:rgba(31,138,82,.12);
+    --red:#c9333a;
+    --red-soft:rgba(201,51,58,.10);
+    --shadow:0 24px 50px -26px rgba(23,21,18,.28);
+    --phone-bezel:#171512;
+  }
+
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:
-      radial-gradient(ellipse at 20% 0%, rgba(200,56,46,0.18), transparent 55%),
-      radial-gradient(ellipse at 85% 20%, rgba(242,183,5,0.10), transparent 50%),
-      var(--bg-night);
-    color:var(--paper);
-    font-family:'Work Sans', sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
     -webkit-font-smoothing:antialiased;
+    transition:background .4s ease,color .4s ease;
   }
- 
-  .wrap{max-width:640px;margin:0 auto;padding:0 20px 80px;}
- 
-  /* HERO */
-  header{
-    padding:56px 20px 40px;
-    text-align:center;
-    position:relative;
-  }
+  h1,h2,h3,.disp{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px;}
+  section{padding:88px 0;}
+  @media (max-width:720px){ section{padding:64px 0;} }
+
   .eyebrow{
-    font-family:'Space Mono', monospace;
-    letter-spacing:0.35em;
+    font-family:'JetBrains Mono',monospace;
     font-size:12px;
-    color:var(--yellow-corn);
+    letter-spacing:.16em;
     text-transform:uppercase;
-    margin-bottom:18px;
+    color:var(--yellow);
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:14px;
   }
-  h1.logo{
-    font-family:'Anton', sans-serif;
-    font-size:clamp(64px, 18vw, 104px);
-    line-height:0.9;
-    margin:0;
-    letter-spacing:0.01em;
-    color:var(--paper);
-    text-shadow:
-      3px 3px 0 var(--red-salsa),
-      6px 6px 0 var(--red-salsa-dark);
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--yellow);}
+
+  /* ---------- HEADER ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
   }
-  .tagline{
-    font-size:17px;
-    color:var(--smoke);
-    max-width:420px;
-    margin:20px auto 0;
-    line-height:1.5;
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;padding:14px 0;
   }
-  .tagline strong{color:var(--paper);}
- 
-  .announce{
-    font-size:16px;
-    line-height:1.65;
-    color:var(--paper);
-    max-width:480px;
-    margin:28px auto 0;
-    padding:0 4px;
+  .wordmark{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;font-size:24px;letter-spacing:-.01em;
   }
-  .announce em{color:var(--yellow-corn);font-style:normal;font-weight:600;}
- 
-  /* TICKET */
-  .ticket{
-    position:relative;
-    background:var(--paper);
-    color:var(--ink);
-    border-radius:2px;
-    margin-top:44px;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  .wordmark .dot{color:var(--yellow);}
+  .city-pill{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;letter-spacing:.03em;
+    background:var(--surface);border:1px solid var(--line);
+    padding:6px 12px;border-radius:100px;color:var(--text-soft);
+    display:flex;align-items:center;gap:6px;white-space:nowrap;
   }
-  .zig-top, .zig-bottom{
-    height:14px;
-    width:100%;
-    background:
-      linear-gradient(135deg, var(--bg-night) 50%, transparent 50%) 0 0,
-      linear-gradient(-135deg, var(--bg-night) 50%, transparent 50%) 0 0;
-    background-size:16px 16px;
-    background-repeat:repeat-x;
+  .city-pill b{color:var(--text);font-weight:600;}
+  nav.links{display:flex;gap:26px;font-size:14.5px;font-weight:500;color:var(--text-soft);}
+  nav.links a:hover{color:var(--text);}
+  @media (max-width:860px){ nav.links{display:none;} }
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 22px;border-radius:12px;font-weight:700;font-size:14.5px;
+    text-decoration:none;border:1px solid transparent;cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease;
   }
-  .zig-bottom{transform:rotate(180deg);}
- 
-  .ticket-inner{padding:8px 32px 6px;}
- 
-  /* Coupon stub: QR + download */
-  .stub{
-    display:flex;
-    align-items:center;
-    gap:20px;
-    padding:22px 0 24px;
+  .btn:active{transform:translateY(2px);}
+  .btn-yellow{background:var(--yellow);color:var(--yellow-ink);box-shadow:0 6px 0 rgba(0,0,0,.18);}
+  .btn-yellow:active{box-shadow:0 2px 0 rgba(0,0,0,.18);}
+  .btn-outline{background:transparent;border-color:var(--line);color:var(--text);}
+  .btn-ghost{background:var(--surface);border-color:var(--line);color:var(--text);}
+  .btn-sm{padding:9px 16px;font-size:13.5px;border-radius:10px;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:64px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  @media (max-width:940px){ .hero-grid{grid-template-columns:1fr;gap:44px;text-align:center;} }
+  .hero h1{font-size:clamp(34px,5.4vw,58px);line-height:1.03;margin:0 0 18px;font-weight:700;letter-spacing:-.01em;}
+  .hero h1 .accent{color:var(--yellow);}
+  .hero p.lead{font-size:17.5px;color:var(--text-soft);max-width:460px;line-height:1.6;margin:0 0 30px;}
+  @media (max-width:940px){ .hero p.lead{margin-inline:auto;} }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;}
+  @media (max-width:940px){ .hero-ctas{justify-content:center;} }
+  .trust{display:flex;gap:26px;flex-wrap:wrap;}
+  @media (max-width:940px){ .trust{justify-content:center;} }
+  .trust-item{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text-soft);}
+  .trust-item b{display:block;color:var(--text);font-size:14px;font-weight:600;}
+  .trust-ico{width:34px;height:34px;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;flex:0 0 auto;}
+
+  /* ---------- PHONE ---------- */
+  .phone{
+    width:272px;border-radius:40px;background:var(--phone-bezel);
+    padding:12px;box-shadow:var(--shadow);position:relative;margin:0 auto;
   }
-  .stub .qr-box{
-    flex:0 0 auto;
-    background:#fff;
-    border:2px solid var(--ink);
-    padding:8px;
-    border-radius:4px;
+  .phone::before{
+    content:"";position:absolute;top:24px;left:50%;transform:translateX(-50%);
+    width:70px;height:6px;border-radius:4px;background:rgba(255,255,255,.18);z-index:2;
   }
-  .stub .qr-box img{display:block;width:104px;height:104px;}
-  .stub-copy{flex:1;min-width:0;}
-  .stub-copy .label{
-    font-family:'Space Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
+  .phone .screen{
+    border-radius:28px;overflow:hidden;background:#fff;aspect-ratio:9/19.3;
+  }
+  .phone .screen img{width:100%;height:100%;object-fit:cover;object-position:top;}
+  .phone-float{
+    position:absolute;background:var(--surface);border:1px solid var(--line);
+    border-radius:14px;padding:10px 14px;box-shadow:var(--shadow);
+    font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:8px;
+  }
+  .hero-phone-wrap{position:relative;display:flex;justify-content:center;}
+  .float-open{top:14%;left:-8%;color:var(--green);}
+  .float-open .dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
+  @media (max-width:520px){ .phone-float{display:none;} }
+
+  /* ---------- CATEGORIES ---------- */
+  .cat-strip{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .cat-title{font-size:22px;font-weight:700;margin:0 0 2px;}
+  .cat-sub{color:var(--text-soft);font-size:14px;margin:0 0 26px;}
+  .cat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:12px;}
+  .cat-card{
+    background:var(--bg);border:1px solid var(--line);border-radius:16px;
+    padding:18px 10px;text-align:center;font-size:13px;font-weight:600;
+  }
+  .cat-card .ico{font-size:26px;margin-bottom:8px;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
+  @media (max-width:940px){ .how-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .how-grid{grid-template-columns:1fr;max-width:280px;margin:0 auto;} }
+  .how-card{text-align:left;}
+  .how-phone{width:100%;max-width:220px;margin:0 auto 18px;}
+  .how-num{
+    font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12.5px;color:var(--yellow);
     margin-bottom:6px;
   }
-  .stub-copy .cta-btn{
-    display:inline-block;
-    background:var(--red-salsa);
-    color:#fff;
-    font-weight:700;
-    font-family:'Work Sans', sans-serif;
-    text-decoration:none;
-    padding:13px 22px;
-    border-radius:6px;
-    font-size:15px;
-    letter-spacing:0.01em;
-    box-shadow:0 6px 0 var(--red-salsa-dark);
-    transition:transform .12s ease;
+  .how-card h3{font-size:16.5px;margin:0 0 6px;}
+  .how-card p{font-size:13.5px;color:var(--text-soft);margin:0;line-height:1.5;}
+
+  /* ---------- BUSINESS ---------- */
+  .business{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .business-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+  @media (max-width:900px){ .business-grid{grid-template-columns:1fr;} }
+  .business h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 16px;line-height:1.15;}
+  .biz-list{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:12px;}
+  .biz-list li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;}
+  .biz-list li b{display:block;font-size:14.5px;}
+  .check{color:var(--green);font-weight:700;flex:0 0 auto;}
+
+  .biz-card{
+    background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:22px;
+    box-shadow:var(--shadow);
   }
-  .stub-copy .cta-btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--red-salsa-dark);}
-  .stub-copy .cta-note{
-    font-size:12.5px;
-    color:var(--ink-soft);
-    margin-top:9px;
-    line-height:1.4;
+  .biz-card .tag{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;
+    color:var(--text-soft);text-transform:uppercase;margin-bottom:14px;display:block;
   }
- 
-  .perf{
-    border-top:2px dashed var(--paper-shadow);
-    position:relative;
-    margin:0 -32px;
+  .biz-card .biz-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;}
+  .biz-card .biz-top span{font-size:12.5px;color:var(--text-soft);}
+  .biz-card .biz-top b{font-size:30px;font-family:'Space Grotesk',sans-serif;}
+  .biz-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .biz-stat{background:var(--surface-2);border-radius:12px;padding:12px 14px;}
+  .biz-stat .l{font-size:11.5px;color:var(--text-soft);margin-bottom:4px;}
+  .biz-stat .v{font-size:19px;font-weight:700;font-family:'Space Grotesk',sans-serif;}
+  .biz-stat .v.up{color:var(--green);}
+
+  /* ---------- GALLERY ---------- */
+  .gallery-scroll{
+    display:flex;gap:20px;overflow-x:auto;padding:8px 4px 20px;scroll-snap-type:x mandatory;
   }
-  .perf::before,.perf::after{
-    content:"";
-    position:absolute;
-    top:-9px;
-    width:18px;height:18px;
-    background:var(--bg-night);
-    border-radius:50%;
+  .gallery-scroll::-webkit-scrollbar{height:6px;}
+  .gallery-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px;}
+  .g-item{flex:0 0 auto;width:190px;scroll-snap-align:start;}
+  .g-item .phone{width:190px;padding:9px;border-radius:30px;}
+  .g-item .phone .screen{border-radius:20px;}
+  .g-item .cap{margin-top:12px;font-size:13px;font-weight:600;text-align:center;}
+  .g-item .cap span{display:block;font-weight:400;color:var(--text-soft);font-size:12px;margin-top:2px;}
+
+  /* ---------- COMPARE ---------- */
+  table.compare{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  table.compare th, table.compare td{padding:14px 18px;text-align:left;font-size:14px;border-bottom:1px solid var(--line);}
+  table.compare th{font-family:'Space Grotesk',sans-serif;font-size:13.5px;color:var(--text-soft);font-weight:600;}
+  table.compare th.hl{background:var(--yellow);color:var(--yellow-ink);}
+  table.compare td.hl{background:color-mix(in srgb, var(--yellow) 10%, transparent);}
+  table.compare tr:last-child td{border-bottom:none;}
+  .yes{color:var(--green);font-weight:700;}
+  .no{color:var(--text-soft);}
+  .compare-wrap{overflow-x:auto;}
+
+  /* ---------- INSTALL ---------- */
+  .install{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .install-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+  @media (max-width:900px){ .install-grid{grid-template-columns:1fr;} }
+  .steps-mini{display:grid;gap:16px;margin:22px 0 28px;}
+  .step-mini{display:flex;gap:14px;align-items:flex-start;}
+  .step-mini .num{
+    width:26px;height:26px;border-radius:50%;background:var(--bg);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;flex:0 0 auto;
   }
-  .perf::before{left:-9px;}
-  .perf::after{right:-9px;}
- 
-  /* STEPS */
-  .steps{padding:26px 0 10px;}
-  .steps-title{
-    font-family:'Space Mono', monospace;
-    font-size:13px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    margin-bottom:16px;
+  .step-mini p{margin:0;font-size:14px;color:var(--text-soft);line-height:1.5;}
+  .step-mini p b{color:var(--text);}
+  .qr-card{
+    background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:26px;
+    display:flex;gap:20px;align-items:center;box-shadow:var(--shadow);
   }
-  .step{
-    display:flex;
-    gap:14px;
-    padding:14px 0;
-    border-bottom:1px dashed var(--paper-shadow);
-    align-items:flex-start;
+  .qr-card img{width:120px;height:120px;border-radius:8px;background:#fff;padding:8px;}
+  .qr-card .note{font-size:12.5px;color:var(--text-soft);margin-top:10px;line-height:1.4;}
+
+  /* ---------- FAQ ---------- */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item summary{
+    cursor:pointer;list-style:none;padding:20px 4px;font-weight:600;font-size:15.5px;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
   }
-  .step:last-child{border-bottom:none;}
-  .step .num{
-    font-family:'Space Mono', monospace;
-    font-weight:700;
-    font-size:14px;
-    color:#fff;
-    background:var(--ink);
-    width:26px;height:26px;
-    flex:0 0 auto;
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .step .txt{font-size:15px;line-height:1.5;color:var(--ink);}
-  .step .txt b{color:var(--red-salsa-dark);}
-  .step .txt a{color:var(--red-salsa-dark);word-break:break-all;}
-  .step .note{
-    display:inline-block;
-    margin-top:6px;
-    font-size:12.5px;
-    color:var(--green-avocado);
-    font-weight:600;
-  }
- 
-  /* FOOTER of ticket */
-  .ticket-footer{
-    text-align:center;
-    padding:22px 0 4px;
-  }
-  .barcode{
-    height:34px;
-    margin:0 auto 10px;
-    max-width:220px;
-    background:repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 6px, transparent 6px 10px);
-  }
-  .thanks{
-    font-family:'Space Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.08em;
-    color:var(--ink-soft);
-    text-transform:uppercase;
-  }
- 
-  /* SAFE NOTE */
-  .safe{
-    display:flex;
-    gap:12px;
-    align-items:flex-start;
-    background:rgba(91,140,74,0.14);
-    border:1px solid rgba(91,140,74,0.4);
-    border-radius:10px;
-    padding:16px 18px;
-    margin:34px 0 0;
-  }
-  .safe .icon{font-size:20px;line-height:1;}
-  .safe p{margin:0;font-size:14px;line-height:1.55;color:var(--paper);}
-  .safe strong{color:var(--green-avocado);}
- 
-  footer.page-end{
-    text-align:center;
-    margin-top:48px;
-    color:var(--smoke);
-    font-size:13px;
-    line-height:1.6;
-  }
-  footer.page-end .brand{
-    font-family:'Anton', sans-serif;
-    color:var(--paper);
-    font-size:20px;
-    letter-spacing:0.03em;
-  }
- 
-  @media (max-width:420px){
-    .stub{flex-direction:column;align-items:stretch;text-align:center;}
-    .stub .qr-box{align-self:center;}
-    .ticket-inner{padding:8px 20px 6px;}
-    .perf{margin:0 -20px;}
-  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";font-size:20px;color:var(--text-soft);flex:0 0 auto;transition:transform .2s ease;}
+  .faq-item[open] summary::after{transform:rotate(45deg);}
+  .faq-item p{margin:0 4px 20px;color:var(--text-soft);font-size:14.5px;line-height:1.6;max-width:640px;}
+
+  /* ---------- FOOTER ---------- */
+  footer.site{padding:56px 0 40px;border-top:1px solid var(--line);}
+  .footer-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+  .footer-brand .wordmark{margin-bottom:10px;}
+  .footer-brand p{color:var(--text-soft);font-size:13.5px;max-width:280px;line-height:1.6;margin:0;}
+  .footer-col h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft);margin:0 0 14px;font-weight:600;}
+  .footer-col a, .footer-col span{display:block;font-size:14px;margin-bottom:10px;color:var(--text);}
+  .footer-bottom{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);font-size:12.5px;color:var(--text-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  .center-head{text-align:center;max-width:640px;margin:0 auto 44px;}
+  .center-head h2{font-size:clamp(26px,3.6vw,38px);margin:0 0 12px;}
+  .center-head p{color:var(--text-soft);font-size:15.5px;margin:0;}
 </style>
 </head>
 <body>
-  <div class="wrap">
 
-    <header>
-      <div class="eyebrow"> · </div>
-      <h1 class="logo">VP1</h1>
-      <p class="tagline">Antojos <strong>a domicilio</strong>, directo desde tu celular.</p>
-      <p class="announce">
-        ¡Hola! En VP1 siempre buscamos consentirte y darte el mejor servicio posible. 🌮🍔✨
-        Hoy estamos de fiesta: te presentamos nuestra nueva <em>aplicación oficial de entregas a domicilio</em>.
-        Ya puedes hacer tus pedidos directo desde tu teléfono, de la forma más rápida y cómoda. 🛵📱
-      </p>
-    </header>
-
-    <div class="ticket">
-      <div class="zig-top"></div>
-      <div class="ticket-inner">
-
-        <div class="stub">
-          <div class="qr-box">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fexpo.dev%2Faccounts%2Fvp1org%2Fprojects%2Fvp1-suport%2Fbuilds%2F451c426f-90cb-4e45-b57f-8bc288581c0e" alt="Código QR para descargar Vp1" width="104" height="104">
-          </div>
-          <div class="stub-copy">
-            <div class="label">Escanea o toca para descargar</div>
-            <a class="cta-btn" href="https://expo.dev/accounts/vp1org/projects/vp1-suport/builds/451c426f-90cb-4e45-b57f-8bc288581c0e" target="_blank" rel="noopener">Descargar Vp1 ↓</a>
-            <div class="cta-note">Es un archivo .apk para Android. La instalación toma menos de 2 minutos.</div>
-          </div>
-        </div>
-
-        <div class="perf"></div>
-
-        <div class="steps">
-          <div class="steps-title">Cómo instalarla — 4 pasos</div>
-
-          <div class="step">
-            <div class="num">1</div>
-            <div class="txt">Toca el botón de arriba <b>"Descargar Vp1"</b>, o escanea el código QR con la cámara de tu celular.</div>
-          </div>
-
-          <div class="step">
-            <div class="num">2</div>
-            <div class="txt">En la página que se abre, presiona el botón negro que dice <b>"Install"</b> (Instalar).</div>
-          </div>
-
-          <div class="step">
-            <div class="num">3</div>
-            <div class="txt">Tu teléfono te pedirá permiso para instalar aplicaciones fuera de la tienda oficial. Elige <b>"Aceptar"</b> o <b>"Permitir"</b>.
-              <span class="note">✓ Es completamente seguro</span>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="num">4</div>
-            <div class="txt">Abre la app, completa un registro rápido y <b>¡listo!</b> Ya puedes ordenar tus platillos favoritos.</div>
-          </div>
-        </div>
-
-        <div class="perf"></div>
-
-        <div class="ticket-footer">
-          <div class="barcode"></div>
-          <div class="thanks">Gracias por tu preferencia · Vuelve pronto</div>
-        </div>
-
-      </div>
-      <div class="zig-bottom"></div>
+<header class="site">
+  <div class="container nav-inner">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span class="wordmark">VP1<span class="dot">.</span></span>
+      <span class="city-pill">📍 <b>Altamira</b> · próx. Tampico y Madero</span>
     </div>
-
-    <div class="safe">
-      <div class="icon">🔒</div>
-      <p><strong>¿Por qué pide ese permiso?</strong> Como Vp1 es una app nueva, Android pide tu confirmación para instalarla directamente (fuera de Google Play). Es un paso normal y no representa ningún riesgo para tu teléfono.</p>
-    </div>
-
-    <footer class="page-end">
-      <div class="brand">VP1</div>
-      <p>Queremos que seas parte de este gran paso con nosotros.<br>
-      Te llevamos el sabor de <strong>TUS COMIDAS FAVORITAS</strong> directo a tu puerta. 🌮</p>
-    </footer>
-
+    <nav class="links">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#negocios">Para negocios</a>
+      <a href="#instalar">Instalar</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-yellow btn-sm" href="https://expo.dev/accounts/vp1org/projects/vp1-suport/builds/451c426f-90cb-4e45-b57f-8bc288581c0e" target="_blank" rel="noopener">Descargar app</a>
   </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Disponible ahora en Altamira</div>
+        <h1>Tu ciudad. Tus negocios.<br><span class="accent">Tus antojos.</span></h1>
+        <p class="lead">Pide comida, mandados y más de tus negocios favoritos, y síguelo llegar en tiempo real hasta tu puerta. Todo desde una sola app.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-yellow" href="https://expo.dev/accounts/vp1org/projects/vp1-suport/builds/451c426f-90cb-4e45-b57f-8bc288581c0e" target="_blank" rel="noopener">⬇ Descargar app (Android)</a>
+          <a class="btn btn-outline" href="#negocios">🏪 Soy negocio</a>
+        </div>
+        <div class="trust">
+          <div class="trust-item"><div class="trust-ico">⚡</div><div><b>Rápido</b>Entregas en minutos</div></div>
+          <div class="trust-item"><div class="trust-ico">🛡️</div><div><b>Seguro</b>Repartidores verificados</div></div>
+          <div class="trust-item"><div class="trust-ico">📍</div><div><b>Local</b>Apoyamos lo nuestro</div></div>
+        </div>
+      </div>
+      <div class="hero-phone-wrap">
+        <div class="phone-float float-open"><span class="dot"></span> TEXMEX está abierto</div>
+        <div class="phone">
+          <div class="screen"><img src="assets/screens/negocios.jpg" alt="Pantalla de negocios en la app VP1, mostrando TEXMEX abierto"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="cat-strip">
+    <div class="container">
+      <p class="eyebrow" style="margin-bottom:2px;">Pide lo que quieras</p>
+      <h2 class="cat-title">Todo lo que necesitas, a un toque</h2>
+      <p class="cat-sub">Y si tu negocio no está en la lista todavía, escríbenos y lo sumamos.</p>
+      <div class="cat-row">
+        <div class="cat-card"><div class="ico">🍔</div>Comida</div>
+        <div class="cat-card"><div class="ico">🌮</div>Tacos</div>
+        <div class="cat-card"><div class="ico">🍦</div>Heladitos</div>
+        <div class="cat-card"><div class="ico">💊</div>Farmacias</div>
+        <div class="cat-card"><div class="ico">🥤</div>Bebidas</div>
+        <div class="cat-card"><div class="ico">🛍️</div>Mandados</div>
+        <div class="cat-card"><div class="ico">🎁</div>Regalos</div>
+        <div class="cat-card"><div class="ico">🍰</div>Postres</div>
+        <div class="cat-card"><div class="ico">➕</div>Y más</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="como-funciona">
+    <div class="container">
+      <div class="center-head">
+        <div class="eyebrow" style="justify-content:center;">Así de fácil</div>
+        <h2>¿Cómo funciona VP1?</h2>
+        <p>Pantallas reales de la app, paso a paso.</p>
+      </div>
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="phone how-phone"><div class="screen"><img src="assets/screens/negocios.jpg" alt="Elegir un negocio en VP1"></div></div>
+          <div class="how-num">01</div>
+          <h3>Escoge un negocio</h3>
+          <p>Mira quién está abierto ahora mismo cerca de ti y elige qué se te antoja.</p>
+        </div>
+        <div class="how-card">
+          <div class="phone how-phone"><div class="screen"><img src="assets/screens/menu.jpg" alt="Explorar el menú en VP1"></div></div>
+          <div class="how-num">02</div>
+          <h3>Explora el menú</h3>
+          <p>Agrega tus productos favoritos al carrito con un par de toques.</p>
+        </div>
+        <div class="how-card">
+          <div class="phone how-phone"><div class="screen"><img src="assets/screens/finalizar-resumen.jpg" alt="Confirmar el pedido en VP1"></div></div>
+          <div class="how-num">03</div>
+          <h3>Confirma tu pedido</h3>
+          <p>Paga en efectivo y recibe tu código único de entrega.</p>
+        </div>
+        <div class="how-card">
+          <div class="phone how-phone"><div class="screen"><img src="assets/screens/mis-pedidos-encurso.jpg" alt="Seguimiento del pedido en VP1"></div></div>
+          <div class="how-num">04</div>
+          <h3>Recíbelo en minutos</h3>
+          <p>Dale tu código al repartidor cuando llegue a tu puerta. Listo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS -->
+  <section class="business" id="negocios">
+    <div class="container business-grid">
+      <div>
+        <div class="eyebrow">¿Tienes un negocio?</div>
+        <h2>Haz que más clientes te encuentren</h2>
+        <ul class="biz-list">
+          <li><span class="check">✓</span><div><b>Recibe pedidos sin llamadas</b>Directo en tu celular, en tiempo real.</div></li>
+          <li><span class="check">✓</span><div><b>Administra tus productos y horarios</b>Tú decides qué vender y cuándo estás abierto.</div></li>
+          <li><span class="check">✓</span><div><b>Acepta o rechaza pedidos</b>Tienes el control de tu operación.</div></li>
+          <li><span class="check">✓</span><div><b>Sin comisiones exageradas</b>Planes accesibles y transparentes.</div></li>
+        </ul>
+        <a class="btn btn-yellow" href="https://wa.me/528331080672?text=Hola%2C%20quiero%20registrar%20mi%20negocio%20en%20VP1" target="_blank" rel="noopener">Quiero registrar mi negocio →</a>
+      </div>
+      <div class="biz-card">
+        <span class="tag">Ejemplo ilustrativo · panel de negocio</span>
+        <div class="biz-top"><span>Ventas de hoy</span><b>$2,450.00</b></div>
+        <div class="biz-stats">
+          <div class="biz-stat"><div class="l">Pedidos</div><div class="v">32</div></div>
+          <div class="biz-stat"><div class="l">Clientes nuevos</div><div class="v up">↑ 18</div></div>
+          <div class="biz-stat"><div class="l">Comisión app</div><div class="v">$160</div></div>
+          <div class="biz-stat"><div class="l">Neto</div><div class="v up">$2,290</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section>
+    <div class="container">
+      <div class="center-head">
+        <div class="eyebrow" style="justify-content:center;">Sin dibujos, la app real</div>
+        <h2>Conoce la app</h2>
+        <p>Estas son capturas reales de VP1 funcionando hoy en Altamira.</p>
+      </div>
+      <div class="gallery-scroll">
+        <div class="g-item"><div class="phone"><div class="screen"><img src="assets/screens/negocios.jpg" alt="Negocios"></div></div><div class="cap">Negocios<span>abiertos ahora</span></div></div>
+        <div class="g-item"><div class="phone"><div class="screen"><img src="assets/screens/menu.jpg" alt="Menú"></div></div><div class="cap">Menú<span>del negocio</span></div></div>
+        <div class="g-item"><div class="phone"><div class="screen"><img src="assets/screens/carrito-con-ubicacion.jpg" alt="Carrito"></div></div><div class="cap">Carrito<span>con envío calculado</span></div></div>
+        <div class="g-item"><div class="phone"><div class="screen"><img src="assets/screens/mapa.jpg" alt="Ubicación de entrega"></div></div><div class="cap">Ubicación<span>de entrega en mapa</span></div></div>
+        <div class="g-item"><div class="phone"><div class="screen"><img src="assets/screens/finalizar-resumen.jpg" alt="Finalizar pedido"></div></div><div class="cap">Checkout<span>con código de entrega</span></div></div>
+        <div class="g-item"><div class="phone"><div class="screen"><img src="assets/screens/pedidos-entregados.jpg" alt="Historial de pedidos"></div></div><div class="cap">Mis pedidos<span>historial completo</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section>
+    <div class="container">
+      <div class="center-head">
+        <div class="eyebrow" style="justify-content:center;">La diferencia</div>
+        <h2>¿Por qué elegir VP1?</h2>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead>
+            <tr><th></th><th class="hl">VP1</th><th>Pedidos por teléfono</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Pedidos automáticos</td><td class="hl"><span class="yes">✓</span></td><td><span class="no">✕</span></td></tr>
+            <tr><td>Seguimiento en tiempo real</td><td class="hl"><span class="yes">✓</span></td><td><span class="no">✕</span></td></tr>
+            <tr><td>Ubicación exacta del repartidor</td><td class="hl"><span class="yes">✓</span></td><td><span class="no">✕</span></td></tr>
+            <tr><td>Código único de entrega</td><td class="hl"><span class="yes">✓</span></td><td><span class="no">✕</span></td></tr>
+            <tr><td>Historial de pedidos</td><td class="hl"><span class="yes">✓</span></td><td><span class="no">✕</span></td></tr>
+            <tr><td>Apoyo a negocios locales</td><td class="hl"><span class="yes">✓</span></td><td><span class="no">✕</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL -->
+  <section class="install" id="instalar">
+    <div class="container install-grid">
+      <div>
+        <div class="eyebrow">Instalación</div>
+        <h2 style="font-size:clamp(26px,3.4vw,34px);margin:0 0 8px;">Instala VP1 en 4 pasos</h2>
+        <p style="color:var(--text-soft);font-size:14.5px;margin:0 0 22px;">Es un archivo .apk para Android. Toma menos de 2 minutos.</p>
+        <div class="steps-mini">
+          <div class="step-mini"><div class="num">1</div><p>Toca <b>"Descargar app"</b> o escanea el código QR con tu cámara.</p></div>
+          <div class="step-mini"><div class="num">2</div><p>En la página que se abre, presiona <b>"Install"</b> (Instalar).</p></div>
+          <div class="step-mini"><div class="num">3</div><p>Tu teléfono pedirá permiso para instalar fuera de la tienda oficial. Elige <b>"Aceptar"</b> — es completamente seguro.</p></div>
+          <div class="step-mini"><div class="num">4</div><p>Abre VP1, regístrate y <b>¡listo!</b> Ya puedes pedir.</p></div>
+        </div>
+      </div>
+      <div class="qr-card">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fexpo.dev%2Faccounts%2Fvp1org%2Fprojects%2Fvp1-suport%2Fbuilds%2F451c426f-90cb-4e45-b57f-8bc288581c0e" alt="Código QR para descargar VP1">
+        <div>
+          <a class="btn btn-yellow" href="https://expo.dev/accounts/vp1org/projects/vp1-suport/builds/451c426f-90cb-4e45-b57f-8bc288581c0e" target="_blank" rel="noopener">Descargar VP1 ↓</a>
+          <p class="note">Escanea o toca para descargar. Solo Android por ahora.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="center-head">
+        <div class="eyebrow" style="justify-content:center;">Preguntas frecuentes</div>
+        <h2>¿Tienes dudas?</h2>
+      </div>
+      <div style="max-width:720px;margin:0 auto;">
+        <details class="faq-item">
+          <summary>¿VP1 está en Google Play?</summary>
+          <p>Aún no. Puedes descargarla directamente desde este sitio de forma segura, como un archivo .apk para Android.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Tiene algún costo?</summary>
+          <p>No, la app es completamente gratuita para clientes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cómo puedo pagar?</summary>
+          <p>Por ahora, en efectivo directo al repartidor cuando te entregue tu pedido.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Quién entrega mi pedido?</summary>
+          <p>Repartidores verificados dentro de tu ciudad.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿En qué zonas están?</summary>
+          <p>Hoy operamos en Altamira. Muy pronto llegamos a Tampico y Ciudad Madero.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="wordmark">VP1<span class="dot">.</span></div>
+        <p>Hecho para Altamira. Apoyamos lo nuestro. Próximamente en Tampico y Ciudad Madero.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Clientes</h4>
+        <a href="#como-funciona">¿Cómo funciona?</a>
+        <a href="#faq">Preguntas frecuentes</a>
+        <a href="https://expo.dev/accounts/vp1org/projects/vp1-suport/builds/451c426f-90cb-4e45-b57f-8bc288581c0e" target="_blank" rel="noopener">Instalar la app</a>
+      </div>
+      <div class="footer-col">
+        <h4>Negocios</h4>
+        <a href="https://wa.me/528331080672?text=Hola%2C%20quiero%20registrar%20mi%20negocio%20en%20VP1" target="_blank" rel="noopener">Registra tu negocio</a>
+        <span>Planes y precios</span>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="https://wa.me/528331080672" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+      <div class="footer-col">
+        <h4>Cobertura</h4>
+        <span>🟢 Altamira</span>
+        <span>🟡 Tampico — próximamente</span>
+        <span>🟡 Ciudad Madero — próximamente</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VP1. Todos los derechos reservados.</span>
+      <span id="theme-indicator"></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Modo claro/oscuro automático según la hora real del dispositivo del visitante.
+  // 07:00–19:00 => claro | resto => oscuro
+  (function applyTimeTheme(){
+    var hour = new Date().getHours();
+    var isDay = hour >= 7 && hour < 19;
+    document.documentElement.setAttribute('data-theme', isDay ? 'light' : 'dark');
+    var indicator = document.getElementById('theme-indicator');
+    if(indicator){
+      indicator.textContent = isDay ? '☀️ Modo día' : '🌙 Modo noche';
+    }
+  })();
+</script>
+
 </body>
 </html>
