@@ -1,0 +1,1 @@
+const nav=document.querySelector('.nav'),topButton=document.querySelector('.to-top');addEventListener('scroll',()=>{nav?.classList.toggle('scrolled',scrollY>20);topButton?.classList.toggle('visible',scrollY>500)},{passive:true});topButton?.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
